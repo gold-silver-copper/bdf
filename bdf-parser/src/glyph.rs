@@ -75,7 +75,7 @@ fn parse_bitmap_row(line: &Line<'_>, bitmap: &mut Vec<u8>) -> Result<(), ()> {
     // Accessing the UTF-8 string by byte and not by char is OK because the
     // hex conversion will fail for non ASCII inputs.
     for hex in line.keyword.as_bytes().chunks_exact(2) {
-        let byte = str::from_utf8(hex)
+        let byte = std::str::from_utf8(hex)
             .ok()
             .and_then(|s| u8::from_str_radix(s, 16).ok())
             .ok_or(())?;
